@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/asegurados")
 public class AseguradoController extends CRUDControllerImplDTO<AseguradoDTO, Integer> {
+
     @Autowired
     private IAseguradoService service;
 

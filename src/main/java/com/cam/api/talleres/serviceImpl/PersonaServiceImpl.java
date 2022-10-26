@@ -9,6 +9,8 @@ import com.cam.api.talleres.transform.IGenericTransform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PersonaServiceImpl extends CRUDImplDTO<PersonaDTO, PersonaEntity, Integer> implements IPersonaService {
 
@@ -25,7 +27,10 @@ public class PersonaServiceImpl extends CRUDImplDTO<PersonaDTO, PersonaEntity, I
 
     @Override
     public PersonaDTO findByTipoDocAndNumDoc(int tipoDoc, String numDoc) {
-        PersonaEntity entity = repository.findByTipoDocAndNumDoc(tipoDoc, numDoc);
-        return transform.getDTO(entity);
+        Optional<PersonaEntity> entity = repository.findByTipoDocAndNumDoc(tipoDoc, numDoc);
+        if(entity.isEmpty()){
+            return null;
+        }
+        return transform.getDTO(entity.get());
     }
 }

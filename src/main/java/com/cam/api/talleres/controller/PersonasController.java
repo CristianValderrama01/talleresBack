@@ -1,6 +1,7 @@
 package com.cam.api.talleres.controller;
 
 import com.cam.api.talleres.dto.PersonaDTO;
+import com.cam.api.talleres.exeption.ModeloNotFoundException;
 import com.cam.api.talleres.service.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,11 @@ public class PersonasController extends CRUDControllerImplDTO<PersonaDTO, Intege
     @GetMapping("/buscar")
     public ResponseEntity<PersonaDTO> findByTipoDocAndNumDoc(@RequestParam(name = "tipoDoc")int tipoDoc,
                                                              @RequestParam(name = "numDoc") String numDoc) throws Exception {
-        return new ResponseEntity<>(service.findByTipoDocAndNumDoc(tipoDoc, numDoc), HttpStatus.OK);
+        PersonaDTO dto = service.findByTipoDocAndNumDoc(tipoDoc, numDoc);
+
+        if(dto == null){
+            throw new ModeloNotFoundException("PERSONA NO ENCONTRADA");
+        }
+        return new ResponseEntity<PersonaDTO>(dto, HttpStatus.OK);
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface ITallerHorariosCabRepository extends IGenericRepository<TallerHorariosCabEntity, Integer>{
 
     //@Query("SELECT t FROM TallerHorariosCabEntity WHERE t.taller.idTaller = :idTaller AND  t.persona.idPersona = :idPersona AND ")
-    //@Query("SELECT * FROM TallerHorariosCabEntity INNER JOIN TallerHorariosDetEntity ON TallerHorariosCabEntity.id_tallerhorariocab = TallerHorariosDetEntity.id_tallerhorariocab")
+    //@Query("SELECT * FROM TallerHorariosCabEntity tc INNER JOIN TallerHorariosDetEntity td ON tc.id_tallerhorariocab = td.id_tallerhorariocab")
     @Query(value = "SELECT *\n" +
             "FROM  public.tallerhorarioscab\n" +
             "INNER JOIN  public.tallerhorariosdet\n" +
