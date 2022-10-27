@@ -10,8 +10,9 @@ import java.util.List;
 @Repository
 public interface ITallerHorariosCabRepository extends IGenericRepository<TallerHorariosCabEntity, Integer>{
 
-    //@Query("SELECT t FROM TallerHorariosCabEntity WHERE t.taller.idTaller = :idTaller AND  t.persona.idPersona = :idPersona AND ")
-    //@Query("SELECT * FROM TallerHorariosCabEntity tc INNER JOIN TallerHorariosDetEntity td ON tc.id_tallerhorariocab = td.id_tallerhorariocab")
+//    @Query("SELECT cab FROM TallerHorariosCabEntity cab INNER JOIN TallerHorariosDetEntity det ON cab.idTallerHorarioCab = det.tallerHorarioCab.idTallerHorarioCab " +
+//            "WHERE cab.taller.idTaller = :idTaller AND  cab.persona.idPersona = :idPersona AND det.dia = :dia")
+
     @Query(value = "SELECT *\n" +
             "FROM  public.tallerhorarioscab\n" +
             "INNER JOIN  public.tallerhorariosdet\n" +

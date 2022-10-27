@@ -10,12 +10,10 @@ import java.util.List;
 @Repository
 public interface ITallerHorariosDetRepository extends IGenericRepository<TallerHorariosDetEntity, Integer>{
 
-    @Query(value = "SELECT *\n" +
-            "FROM  public.tallerhorariosdet\n" +
-            "INNER JOIN  public.tallerhorarioscab\n" +
-            "ON public.tallerhorariosdet.id_tallerhorariocab = public.tallerhorarioscab.id_tallerhorariocab\n" +
-            "WHERE public.tallerhorarioscab.id_persona = :idPersona AND \n" +
-            "public.tallerhorarioscab.id_taller = :idTaller AND\n" +
-            "public.tallerhorariosdet.dia = :dia", nativeQuery = true)
+    @Query("SELECT det FROM TallerHorariosDetEntity det INNER JOIN TallerHorariosCabEntity cab " +
+            "ON det.tallerHorarioCab.idTallerHorarioCab = cab.idTallerHorarioCab " +
+            "WHERE cab.taller.idTaller = :idTaller AND  " +
+            "cab.persona.idPersona = :idPersona AND " +
+            "det.dia = :dia")
     List<TallerHorariosDetEntity> buscarPorTallerTalleristaFecha(int idTaller, int idPersona, LocalDateTime dia);
 }
